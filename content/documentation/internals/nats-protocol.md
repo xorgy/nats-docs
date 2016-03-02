@@ -238,7 +238,7 @@ Deliver the same message along with a reply inbox:
 
 ### Description
 
-`PING` and `PONG` implement a simple keep-alive mechanism between client and server. Once a client establishes a connection to the NATS server, the server will continuously send `PING` messages to the client at a configurable interval. If the client fails to respond with a `PONG` message within the configured response interval, the server will terminate its connection. If your connection stays idle for too long, it is cut off:
+`PING` and `PONG` implement a simple keep-alive mechanism between client and server. Once a client establishes a connection to the NATS server, the server will continuously send `PING` messages to the client at a configurable interval. If the client fails to respond to each `PING` with a `PONG` message within the configured response interval, the server will terminate its connection:
 
 ```
 telnet demo.nats.io 4222
@@ -254,6 +254,8 @@ Connection closed by foreign host.
 ```
 
 If the server sends a ping request, you can reply with a pong message to notify the server that you are still interested. You can also ping the server and will receive a pong reply. The ping/pong interval is configurable.
+
+If the client sends a `PONG` message but the server did not send a ping request for it, the client will be disconnected.
 
 ## <a name="OKERR"></a>+OK/ERR
 
