@@ -271,11 +271,12 @@ Handling of these errors usually has to be done asynchronously.
 
 Protocol error messages which close the connection:
 
-- `-ERR 'Unknown Protocol Operation'`: Unknown protocol error
+- `-ERR 'Unknown Protocol Operation'`: Unknown protocol error.
 - `-ERR 'Authorization Violation'`: Client failed to authenticate to the server with credentials specified in the [CONNECT](#CONNECT) message.
-- `-ERR 'Authorization Timeout'`: Client took too long to authenticate to the server after establishing a connection (default 1 second)
-- `-ERR 'Parser Error'`: Cannot parse the protocol message sent by the client
+- `-ERR 'Authorization Timeout'`: Client took too long to authenticate to the server after establishing a connection (default 1 second).
+- `-ERR 'Parser Error'`: Cannot parse the protocol message sent by the client.
 - `-ERR 'Stale Connection'`: PING/PONG interval expired.
+- `-ERR 'Received PONG without a pending PING'`: Client sent a PONG while there were no pending PINGs.
 - `-ERR 'Slow Consumer'`: The server pending data size for the connection has reached the maximum size (default 10MB).
 - `-ERR 'Maximum Payload Exceeded'`: Client attempted to publish a message with a payload size that exceeds the `max_payload` size configured on the server. This value is supplied to the client upon connection in the initial [`INFO`](#INFO) message. The client is expected to do proper accounting of byte size to be sent to the server in order to handle this error synchronously.
 
